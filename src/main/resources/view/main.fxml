@@ -11,20 +11,40 @@
     </padding>
 
     <HBox alignment="CENTER_LEFT" spacing="10">
-        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Inventario SAPAM" />
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Sistema Gestor de Inventario y Alamacen" />
         <Region HBox.hgrow="ALWAYS" />
-        <TextField fx:id="txtBuscar" promptText="Buscar por código" style="-fx-pref-height: 32px; -fx-background-radius: 8;" />
+        <TextField fx:id="txtBuscar" onAction="#buscarProducto" promptText="Buscar por código o escanear el código de barras" style="-fx-pref-height: 32px; -fx-background-radius: 8;" />
         <Button onAction="#buscarProducto" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Buscar" />
-        <Button onAction="#abrirNuevoProducto" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="+ Nuevo" />
-        <Button onAction="#generarReporte" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Reporte Mensual" />
-        <Button onAction="#cerrarSesion" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-background-radius: 8;" text="Cerrar Sesión" />
+        <Button fx:id="btnNuevoProducto" onAction="#abrirNuevoProducto" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="+ Nuevo" />
+        <Button fx:id="btnEntrada" onAction="#abrirEntrada" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="+ Entrada" />
+        <Button fx:id="btnSalida" onAction="#abrirSalida" style="-fx-background-color: #17A2B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="+ Salida" />
+        <Button onAction="#abrirKardex" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Kardex" />
+        <Button fx:id="btnBitacora" onAction="#abrirBitacora" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Bitácora" />
+        <Button fx:id="btnReporte" onAction="#generarReporte" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Generar Reporte" />
+        <Button onAction="#cerrarSesion" style="-fx-background-color: #ec3b58; -fx-text-fill: #f8f8f8; -fx-font-weight: bold; -fx-background-radius: 8;" text="Cerrar Sesión" />
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Módulos:" />
+        <Button onAction="#abrirHerramientas" style="-fx-background-color: #f3b405; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Herramientas" />
+        <Button fx:id="btnUsuarios" onAction="#abrirUsuarios" style="-fx-background-color: #495057; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Usuarios" />
+        <Label style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Secciones:" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Todo" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #5386a3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Papelería" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #5386a3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Construcción" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #5386a3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Vehículos" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #5386a3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Uniformes" />
+        <Button onAction="#filtrarSeccion" style="-fx-background-color: #5386a3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Ferretería" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label fx:id="lblSesion" style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="" />
+
     </HBox>
 
     <TableView fx:id="tablaProductos" style="-fx-background-radius: 10; -fx-border-color: #E3F2FD; -fx-border-radius: 10;">
         <columns>
             <TableColumn fx:id="colCodigo" prefWidth="120" text="Código" />
-            <TableColumn fx:id="colNombre" prefWidth="200" text="Nombre" />
-            <TableColumn fx:id="colCategoria" prefWidth="120" text="Categoría" />
+            <TableColumn fx:id="colNombre" prefWidth="220" text="Nombre" />
+            <TableColumn fx:id="colSeccion" prefWidth="140" text="Sección" />
             <TableColumn fx:id="colStock" prefWidth="100" text="Stock" />
             <TableColumn fx:id="colMinimo" prefWidth="100" text="Mínimo" />
             <TableColumn fx:id="colAcciones" prefWidth="180" text="Acciones" />
@@ -34,5 +54,20 @@
         </VBox.margin>
     </TableView>
 
-    <Label style="-fx-text-fill: #6c757d;" text="* Los productos en rojo tienen stock bajo" />
+    <VBox alignment="CENTER_LEFT" spacing="3"
+          style="-fx-background-color: #F8F9FA; -fx-background-radius: 10; -fx-border-color: #E3F2FD; -fx-border-radius: 10;">
+        <padding>
+            <Insets bottom="8" left="12" right="12" top="8" />
+        </padding>
+        <Label fx:id="lblFichaTitulo" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Selecciona un producto para ver su ficha" />
+        <Label fx:id="lblFicha" style="-fx-text-fill: #6c757d;" text="" wrapText="true" />
+    </VBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label fx:id="lblSeccion" style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label style="-fx-text-fill: #6c757d;" text="* Los productos en verde tienen stock alto" />
+        <Label style="-fx-text-fill: #6c757d;" text="* Los productos en amarillo tienen stock bajo" />
+        <Label style="-fx-text-fill: #6c757d;" text="* Los productos en rojo tienen stock nulo" />
+    </HBox>
 </VBox>

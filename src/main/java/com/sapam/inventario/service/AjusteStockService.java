@@ -24,7 +24,7 @@ public class AjusteStockService {
         Producto producto = productoRepository.findById(productoId)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        int stockAnterior = producto.getStockActual();
+        int stockAnterior = producto.getExistenciaActual();
 
         AjusteStock ajuste = new AjusteStock();
         ajuste.setProducto(producto);
@@ -33,7 +33,7 @@ public class AjusteStockService {
         ajuste.setMotivo(motivo);
         ajuste.setFecha(LocalDateTime.now());
 
-        producto.setStockActual(nuevoStock);
+        producto.setExistenciaActual(nuevoStock);
         productoRepository.save(producto);
 
         return ajusteStockRepository.save(ajuste);

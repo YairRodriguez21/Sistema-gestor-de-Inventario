@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="12" style="-fx-background-color: white; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sapam.inventario.javafx.controller.EntradaFormController">
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Registrar Entrada de Almacén" />
+
+    
+
+    <Label style="-fx-font-weight: bold;" text="Observaciones" />
+    <TextField fx:id="txtObservaciones" promptText="Motivo, pedido, requerimiento..." />
+
+    <Label style="-fx-font-weight: bold;" text="Productos que entran" />
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <TextField fx:id="txtEscanear" onAction="#agregarPorEscaneo" promptText="Escanea el código de barras: cada lectura agrega 1 unidad" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" HBox.hgrow="ALWAYS" />
+    </HBox>
+    
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <ComboBox fx:id="cmbProducto" promptText="Seleccionar producto" HBox.hgrow="ALWAYS" />
+        <TextField fx:id="txtCantidad" prefWidth="90" promptText="Cant." />
+        <Button onAction="#agregarProducto" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-pref-width: 90px;" text="Añadir" />
+    </HBox>
+
+    
+
+    <TableView fx:id="tablaProductos" prefHeight="190">
+        <columns>
+            <TableColumn fx:id="colProducto" prefWidth="230" text="Producto" />
+            <TableColumn fx:id="colCantidad" prefWidth="80" text="Cantidad" />
+            <TableColumn fx:id="colAcciones" prefWidth="170" text="Corregir" />
+        </columns>
+    </TableView>
+
+    <Label fx:id="lblResumen" style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="0 productos, 0 unidades" />
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button onAction="#registrarEntrada" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 150px;" text="Registrar entrada" />
+        <Button onAction="#cancelar" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-pref-width: 100px;" text="Cancelar" />
+    </HBox>
+</VBox>

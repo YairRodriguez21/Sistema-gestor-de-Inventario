@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sapam.inventario.javafx.controller.HerramientasController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Herramientas" />
+    <Label fx:id="lblResumen" style="-fx-text-fill: #6c757d;" text="Alta, préstamo y devolución" />
+
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <TextField fx:id="txtBuscar" onAction="#buscar" promptText="Buscar herramienta o escanear el ticket de préstamo (PRE-...)" style="-fx-pref-height: 32px; -fx-background-radius: 8;" />
+        <Button onAction="#buscar" style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Buscar" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnNueva" onAction="#nueva" style="-fx-background-color: #17A2B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="+ Nueva" />
+        <Button fx:id="btnPrestar" onAction="#prestar" style="-fx-background-color: #FFC107; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-background-radius: 8;" text="Prestar" />
+        <Button fx:id="btnDevolver" onAction="#devolver" style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Devolver" />
+        <Button fx:id="btnEditar" onAction="#editar" style="-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Editar" />
+        <Button fx:id="btnEliminar" onAction="#eliminar" style="-fx-background-color: #343A40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Eliminar" />
+        <Button onAction="#actualizar" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-background-radius: 8;" text="Actualizar" />
+        <Button onAction="#cerrar" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-background-radius: 8;" text="Cerrar" />
+    </HBox>
+
+    <TableView fx:id="tabla" style="-fx-background-radius: 10; -fx-border-color: #E3F2FD; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colCodigo" prefWidth="300" text="Código" />
+            <TableColumn fx:id="colNombre" prefWidth="175" text="Nombre" />
+            <TableColumn fx:id="colMarca" prefWidth="100" text="Marca" />
+            <TableColumn fx:id="colModelo" prefWidth="100" text="Modelo" />
+            <TableColumn fx:id="colSerie" prefWidth="110" text="No. serie" />
+            <TableColumn fx:id="colEstado" prefWidth="95" text="Estado" />
+            <TableColumn fx:id="colArea" prefWidth="135" text="Área" />
+            <TableColumn fx:id="colSituacion" prefWidth="330" text="Situación" />
+        </columns>
+    </TableView>
+
+    <Label fx:id="lblDetalle" style="-fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Selecciona una herramienta para ver su situación" />
+    <Label style="-fx-text-fill: #6c757d;" text="Una herramienta solo puede estar prestada a una persona a la vez. Para devolverla, escanea el código del ticket de préstamo o selecciona la fila y pulsa Devolver." />
+</VBox>

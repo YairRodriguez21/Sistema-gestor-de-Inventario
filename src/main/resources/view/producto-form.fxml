@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
@@ -12,17 +13,30 @@
 
     <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Nuevo Producto" />
 
-    <TextField fx:id="txtCodigo" promptText="Código de barras" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" />
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7F8C8D;" text="" />
+        <Label fx:id="lblCodigo" style="-fx-font-family: Consolas; -fx-font-size: 14px; -fx-text-fill: #2C3E50;" text="" />
+    </HBox>
 
     <TextField fx:id="txtNombre" promptText="Nombre del producto" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" />
 
     <TextField fx:id="txtDescripcion" promptText="Descripción" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" />
 
-    <TextField fx:id="txtCategoria" promptText="Categoría" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" />
+    <ComboBox fx:id="cbSeccion" promptText="Sección (Papelería, Construcción, Vehículos, Uniformes, Ferretería)" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" />
 
     <HBox spacing="10">
         <TextField fx:id="txtStock" promptText="Stock actual" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" HBox.hgrow="ALWAYS" />
         <TextField fx:id="txtMinimo" promptText="Stock mínimo" style="-fx-pref-height: 40px; -fx-background-radius: 8; -fx-border-color: #E3F2FD; -fx-border-radius: 8;" HBox.hgrow="ALWAYS" />
+    </HBox>
+
+    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Código de barras" />
+
+    <HBox alignment="CENTER" spacing="20">
+        <ImageView fx:id="imgCodigo" fitHeight="150" fitWidth="150" preserveRatio="true" />
+        <VBox spacing="8">
+            <Label fx:id="lblCodigoBarras" style="-fx-font-family: Consolas; -fx-font-size: 13px; -fx-text-fill: #2C3E50;" text="" />
+            <Button fx:id="btnImprimirCodigo" disable="true" onAction="#imprimirEtiqueta" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 40px; -fx-background-radius: 8; -fx-cursor: hand;" text="Imprimir etiqueta" />
+        </VBox>
     </HBox>
 
     <HBox alignment="CENTER" spacing="10">

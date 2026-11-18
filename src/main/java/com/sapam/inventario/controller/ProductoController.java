@@ -15,7 +15,7 @@ public class ProductoController {
 
     @GetMapping
     public List<Producto> listar() {
-        return productoService.listarTodos();
+        return productoService.listarActivos();
     }
 
     @GetMapping("/{id}")

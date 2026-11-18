@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="10" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sapam.inventario.javafx.controller.KardexProductoController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Kardex del producto" />
+    <Label fx:id="lblProducto" style="-fx-font-weight: bold;" />
+    <Label fx:id="lblStock" style="-fx-text-fill: #6c757d;" />
+
+    <TableView fx:id="tablaKardex" style="-fx-background-radius: 10; -fx-border-color: #E3F2FD; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colFecha" prefWidth="95" text="Fecha" />
+            <TableColumn fx:id="colHora" prefWidth="75" text="Hora" />
+            <TableColumn fx:id="colTipo" prefWidth="100" text="Tipo" />
+            <TableColumn fx:id="colCantidad" prefWidth="90" text="Cantidad" />
+            <TableColumn fx:id="colAntes" prefWidth="95" text="Exist. antes" />
+            <TableColumn fx:id="colDespues" prefWidth="105" text="Exist. después" />
+            <TableColumn fx:id="colFolio" prefWidth="185" text="Folio" />
+            <TableColumn fx:id="colResponsable" prefWidth="185" text="Responsable" />
+            <TableColumn fx:id="colObservaciones" prefWidth="360" text="Observaciones" />
+        </columns>
+    </TableView>
+
+    
+    <Button onAction="#cerrar" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-background-radius: 8; -fx-pref-width: 100px;" text="Cerrar" />
+</VBox>

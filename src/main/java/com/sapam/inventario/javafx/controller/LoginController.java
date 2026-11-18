@@ -2,6 +2,7 @@ package com.sapam.inventario.javafx.controller;
 
 import com.sapam.inventario.entity.Usuario;
 import com.sapam.inventario.service.AuthService;
+import com.sapam.inventario.service.BitacoraService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,21 +27,39 @@ public class LoginController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private BitacoraService bitacoraService;
+
     @FXML
     private void iniciarSesion() {
         String email = usernameField.getText();
         String password = passwordField.getText();
 
-        Optional<Usuario> usuarioOpt = authService.obtenerUsuarioPorEmail(email);
-        
-        if (usuarioOpt.isPresent() && usuarioOpt.get().getPassword().equals(password)) {
+        // Un solo sitio decide si la contraseña es correcta (AuthService), para
+        // que entrar por la ventana y entrar por la API no puedan disentir.
+        Optional<Usuario> usuarioOpt = authService.entrar(email, password);
+
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+
+            // Cuenta desactivada por el administrador -> no entra
+            if (Boolean.FALSE.equals(usuario.getActivo())) {
+                mostrarError("Cuenta desactivada", "La cuenta está inactiva. Contacte al administrador.");
+                return;
+            }
+
+            // Dejar registro del inicio de sesión en la bitácora
+            bitacoraService.registrar(BitacoraService.LOGIN, "SEGURIDAD",
+                    "Email: " + email + " | Rol: " + usuario.getRol(),
+                    "Inicio de sesión correcto", usuario);
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main.fxml"));
                 loader.setControllerFactory(com.sapam.inventario.javafx.JavaFxApplication.getContext()::getBean);
                 Parent root = loader.load();
                 
                 MainController mainController = loader.getController();
-                mainController.setUsuarioActual(usuarioOpt.get());
+                mainController.setUsuarioActual(usuario);
                 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -49,18 +68,18 @@ public class LoginController {
                 
             } catch (Exception e) {
                 e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Error al cargar la aplicación");
-                alert.showAndWait();
+                mostrarError("Error", "Error al cargar la aplicación");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de Login");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuario o contraseña incorrectos");
-            alert.showAndWait();
+            mostrarError("Error de Login", "Usuario o contraseña incorrectos");
         }
+    }
+
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

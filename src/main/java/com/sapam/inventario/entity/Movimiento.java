@@ -29,10 +29,6 @@ public class Movimiento {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "receptor_id")
-    private Receptor receptor;
-
     private String observaciones;
 
     private LocalDateTime fecha;
@@ -59,9 +55,6 @@ public class Movimiento {
 
     public Usuario getUsuario() { return usuario; }
     public void setUsuario(Usuario usuario) { this.usuario = usuario; }
-
-    public Receptor getReceptor() { return receptor; }
-    public void setReceptor(Receptor receptor) { this.receptor = receptor; }
 
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }

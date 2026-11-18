@@ -33,3 +33,15 @@ build/
 .vscode/
 .DS_Store
 *.DS_Store
+
+### Herramientas del entorno (no son parte del proyecto) ###
+install.ps1
+opencode.json
+
+### Basura de la JVM y registros de diagnóstico ###
+# hs_err_pid*.log lo escribe la JVM cuando se cae a nivel nativo: no es código
+# del proyecto y no debe entrar en el repositorio. sgia-impresion.log es el
+# registro de cada intento de impresión que deja RegistroImpresion.
+hs_err_pid*.log
+replay_pid*.log
+sgia-impresion.log

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  Ticket de préstamo para la POS-80.
+
+  El contenido mide 260 px (68.8 mm) y el área imprimible del driver es de
+  unos 272 px (71.9 mm), así que el papel no se recorta. Las barras se pegan
+  después del snapshot, a 203 dpi, igual que en las etiquetas: si se dejaran
+  al reescalado de JavaFX el lector no podría devolver el préstamo escaneando
+  este papel.
+-->
+<VBox alignment="TOP_CENTER" fillWidth="false" spacing="6" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sapam.inventario.javafx.controller.TicketPrestamoController" prefWidth="284">
+    <padding>
+        <Insets bottom="14" left="12" right="12" top="14" />
+    </padding>
+
+    <VBox fx:id="vbTicket" spacing="3" prefWidth="260">
+        <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="TICKET DE PRÉSTAMO" />
+        <Label fx:id="lblFolio" maxWidth="Infinity" style="-fx-font-size: 11px; -fx-font-weight: bold;" textAlignment="CENTER" wrapText="true" />
+
+        <!--
+          El visor muestra una vista previa; al imprimir, el código se vuelve a
+          pegar en este mismo hueco con la resolución de la térmica.
+        -->
+        <ImageView fx:id="imgCodigo" fitHeight="60" fitWidth="260" preserveRatio="false" smooth="false" />
+        <Label fx:id="lblCodigoTexto" alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 10px; -fx-font-weight: bold;" textAlignment="CENTER" />
+
+        <Region prefHeight="1" maxWidth="Infinity" style="-fx-background-color: black;" />
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Fecha:" prefWidth="82" />
+            <Label fx:id="lblFechaHora" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Recibe:" prefWidth="82" />
+            <Label fx:id="lblRecibe" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Área:" prefWidth="82" />
+            <Label fx:id="lblArea" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Para dónde:" prefWidth="82" />
+            <Label fx:id="lblDestino" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Herramienta:" prefWidth="82" />
+            <Label fx:id="lblHerramienta" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Código:" prefWidth="82" />
+            <Label fx:id="lblCodigoHerramienta" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Serie:" prefWidth="82" />
+            <Label fx:id="lblSerie" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Devolver antes:" prefWidth="82" />
+            <Label fx:id="lblDevolverAntes" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <HBox spacing="6">
+            <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Entregó:" prefWidth="82" />
+            <Label fx:id="lblEntrego" style="-fx-font-size: 11px;" HBox.hgrow="ALWAYS" wrapText="true" />
+        </HBox>
+
+        <Region prefHeight="1" maxWidth="Infinity" style="-fx-background-color: black;" />
+
+        <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Observaciones" />
+        <Label fx:id="lblObservaciones" style="-fx-font-size: 11px;" wrapText="true" />
+
+        <Label maxWidth="Infinity" style="-fx-font-size: 9px; -fx-text-fill: #6c757d;" text="Conserve este ticket: su código sirve para registrar la devolución." textAlignment="CENTER" wrapText="true" />
+    </VBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button onAction="#imprimirTicket" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 120px;" text="Imprimir" />
+        <Button onAction="#cerrarTicket" style="-fx-background-color: #E3F2FD; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-pref-width: 100px;" text="Cerrar" />
+    </HBox>
+</VBox>
